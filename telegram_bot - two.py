@@ -521,20 +521,19 @@ def handle_pdf_generation(data, chat_id):
             user_birthday=data["Birthday"],
             user_input_value=data["Type Number"]
         )
-        # Move file to server directory
-        server_pdf_path = os.path.join(FILES_DIR, os.path.basename(pdf_path))
-        os.rename(pdf_path, server_pdf_path)
-        
-        # Log file with creation time
-        creation_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
-            log_file.write(f"{os.path.basename(pdf_path)},{creation_time}\n")
-        
-        # Notify user
-        bot.send_message(chat_id, f"Your file is available at: {server_pdf_path}")
+        if chat_id not in generated_files:
+            generated_files[chat_id] = []
+        generated_files[chat_id].append(pdf_path)
+
+        with open(pdf_path, "rb") as pdf_file:
+            bot.send_document(chat_id, pdf_file)
+            server_pdf_path = os.path.join(FILES_DIR, os.path.basename(pdf_path))
+            os.rename(pdf_path, server_pdf_path)
+            creation_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
+             log_file.write(f"{os.path.basename(pdf_path)},{creation_time}\n")
     except Exception as e:
         bot.send_message(chat_id, f"Error: {e}")
-
 
 def generate_pdf_and_send(chat_id):
     data = user_data[chat_id]
