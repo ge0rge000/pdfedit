@@ -28,9 +28,9 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 # Register fonts
 base_path = os.path.dirname(__file__)
-pdfmetrics.registerFont(TTFont('Arial', os.path.join(base_path, 'Arial.ttf')))
-pdfmetrics.registerFont(TTFont('ArialNarrow', os.path.join(base_path, 'arialnarrow.ttf')))
-pdfmetrics.registerFont(TTFont('ArialNarrowBold', os.path.join(base_path, 'arialnarrow_bold.ttf')))
+pdfmetrics.registerFont(TTFont('Arial', os.path.join(base_path, 'Arial.ttf'), subset=True))
+pdfmetrics.registerFont(TTFont('ArialNarrow', os.path.join(base_path, 'arialnarrow.ttf'), subset=True))
+pdfmetrics.registerFont(TTFont('ArialNarrowBold', os.path.join(base_path, 'arialnarrow_bold.ttf'), subset=True))
 
 # Store user data temporarily
 user_data = {}
@@ -51,6 +51,7 @@ def create_pdf(title, first_name, second_name, address_line, user_input_code, us
         output_pdf_path = f"{first_name} {second_name}.pdf"
         reader = PdfReader(input_pdf_path)
         writer = PdfWriter()
+        writer.compress_content_streams = True  # Compress streams
         current_datetime = datetime.now().strftime("D:%Y%m%d%H%M%S")
         writer.add_metadata({
                     "/Title": "driver_out.pdf",
