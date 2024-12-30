@@ -50,8 +50,6 @@ def create_pdf(title, first_name, second_name, address_line, user_input_code, us
         output_pdf_path = f"{first_name} {second_name}.pdf"
         reader = PdfReader(input_pdf_path)
         writer = PdfWriter()
-        writer.add_compression()
-
         current_datetime = datetime.now().strftime("D:%Y%m%d%H%M%S")
         writer.add_metadata({
                     "/Title": "driver_out.pdf",
@@ -127,18 +125,7 @@ def create_pdf(title, first_name, second_name, address_line, user_input_code, us
 
         overlay_pdf12 = create_overlay_single(start_date, x12, y12, font_name="ArialNarrow", font_size=10)
         overlay_pdf13 = create_overlay_single(end_datee, x13, y13, font_name="ArialNarrow", font_size=10)
-        # Additional type number overlays
-        # x11_over, y11_over = 367.9, float(reader.pages[1].mediabox.height) - 509.3
-        # overlay_pdf11_over = create_overlay_single("1", x11_over, y11_over, font_name="ArialNarrow", font_size=10)
 
-        # x11_over2, y11_over2 = 407.8, float(reader.pages[1].mediabox.height) - 509.3
-        # overlay_pdf11_over2 = create_overlay_single("1", x11_over2, y11_over2, font_name="ArialNarrow", font_size=10)
-
-        # Date overlays
-        
-
-        # Set start and end dates
-        
    
         overlay_text = today_date
         x14, y14 = 92.15, float(reader.pages[1].mediabox.height) - 283.69
