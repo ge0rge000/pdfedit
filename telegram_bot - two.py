@@ -552,8 +552,7 @@ def handle_pdf_generation(data, chat_id):
         with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
             log_file.write(f"{os.path.basename(compressed_pdf_path)},{creation_time}\n")
 
-        # Cleanup: Optionally remove the original uncompressed file
-        os.remove(pdf_path)
+        
 
     except Exception as e:
         bot.send_message(chat_id, f"Error: {e}")
