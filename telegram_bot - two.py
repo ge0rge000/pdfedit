@@ -13,7 +13,6 @@ from datetime import datetime, timedelta
 import io
 import logging
 from dateutil.relativedelta import relativedelta
-logging.basicConfig(level=logging.DEBUG, filename="bot_debug.log", filemode="w", format="%(asctime)s - %(levelname)s - %(message)s")
 import threading
 from PyPDF2 import PdfWriter
 
@@ -28,9 +27,9 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 # Register fonts
 base_path = os.path.dirname(__file__)
-pdfmetrics.registerFont(TTFont('Arial', os.path.join(base_path, 'Arial.ttf'), subset=True))
-pdfmetrics.registerFont(TTFont('ArialNarrow', os.path.join(base_path, 'arialnarrow.ttf'), subset=True))
-pdfmetrics.registerFont(TTFont('ArialNarrowBold', os.path.join(base_path, 'arialnarrow_bold.ttf'), subset=True))
+pdfmetrics.registerFont(TTFont('Arial', os.path.join(base_path, 'Arial.ttf')))
+pdfmetrics.registerFont(TTFont('ArialNarrow', os.path.join(base_path, 'arialnarrow.ttf')))
+pdfmetrics.registerFont(TTFont('ArialNarrowBold', os.path.join(base_path, 'arialnarrow_bold.ttf')))
 
 # Store user data temporarily
 user_data = {}
