@@ -506,6 +506,7 @@ def validate_type_number(message):
 
 def handle_pdf_generation(data, chat_id):
     try:
+        # Step 1: Generate the PDF
         pdf_path = create_pdf(
             title=data["Title"],
             first_name=data["First Name"],
@@ -515,21 +516,25 @@ def handle_pdf_generation(data, chat_id):
             user_birthday=data["Birthday"],
             user_input_value=data["Type Number"]
         )
+
+        # Step 2: Compress the PDF
         compressed_pdf_path = f"compressed_{os.path.basename(pdf_path)}"
         compress_pdf_with_ghostscript(pdf_path, compressed_pdf_path)
-        if chat_id not in generated_files:
-            generated_files[chat_id] = []
-        generated_files[chat_id].append(compressed_pdf_path)
 
+        # Step 3: Check if the compressed file exists
+        if not os.path.exists(compressed_pdf_path):
+            raise FileNotFoundError(f"Compressed file not found: {compressed_pdf_path}")
+
+        # Step 4: Send the compressed PDF to the user
         with open(compressed_pdf_path, "rb") as pdf_file:
             bot.send_document(chat_id, pdf_file)
-        # Move file to server directory
+
+        # Step 5: Move file to server directory
         server_pdf_path = os.path.join(FILES_DIR, os.path.basename(compressed_pdf_path))
         os.rename(compressed_pdf_path, server_pdf_path)
         creation_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
             log_file.write(f"{os.path.basename(compressed_pdf_path)},{creation_time}\n")
-         
 
     except Exception as e:
         bot.send_message(chat_id, f"Error: {e}")
