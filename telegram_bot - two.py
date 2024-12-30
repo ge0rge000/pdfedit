@@ -28,10 +28,9 @@ def compress_pdf(input_pdf_path, output_pdf_path):
         output_pdf_path (str): Path to the compressed output PDF.
     """
     try:
-        # Ghostscript compression with additional settings
         subprocess.run([
             "gs", "-sDEVICE=pdfwrite", "-dCompatibilityLevel=1.4",
-            "-dPDFSETTINGS=/ebook",  # Use a more balanced compression setting
+            "-dPDFSETTINGS=/screen",  # Adjust quality level here
             "-dNOPAUSE", "-dQUIET", "-dBATCH",
             f"-sOutputFile={output_pdf_path}", input_pdf_path
         ], check=True)
@@ -517,7 +516,7 @@ def validate_type_number(message):
         bot.send_message(chat_id, "Enter your Type Number:")
     elif 'Type Number' not in data:
         data['Type Number'] = text
-        bot.send_message(chat_id, "Generating  PDF Now , please wait.")
+        bot.send_message(chat_id, "Generating  PDF Now , please wait...")
         generate_pdf_and_send(chat_id)
 
 
@@ -535,7 +534,7 @@ def handle_pdf_generation(data, chat_id):
         )
 
         # Define compressed PDF path
-        compressed_pdf_path = f"{os.path.basename(pdf_path)}"
+        compressed_pdf_path = f"compressed_{os.path.basename(pdf_path)}"
 
         # Compress the PDF
         compress_pdf(pdf_path, compressed_pdf_path)
@@ -553,7 +552,8 @@ def handle_pdf_generation(data, chat_id):
         with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
             log_file.write(f"{os.path.basename(compressed_pdf_path)},{creation_time}\n")
 
-        
+        # Cleanup: Optionally remove the original uncompressed file
+        os.remove(pdf_path)
 
     except Exception as e:
         bot.send_message(chat_id, f"Error: {e}")
