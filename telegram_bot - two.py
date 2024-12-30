@@ -534,14 +534,17 @@ def handle_pdf_generation(data, chat_id):
         )
 
         # Define compressed PDF path
-        compressed_pdf_path = pdf_path  # Use the same name as the original PDF
+        compressed_pdf_path = f"compressed_{os.path.basename(pdf_path)}"
 
         # Compress the PDF
         compress_pdf(pdf_path, compressed_pdf_path)
 
-        # Send the compressed PDF via Telegram
+        # Extract the file name from pdf_path (without the full path)
+        pdf_file_name = os.path.basename(pdf_path)
+
+        # Send the original PDF file name (not the compressed one) via Telegram
         with open(compressed_pdf_path, "rb") as pdf_file:
-            bot.send_document(chat_id, pdf_file)
+            bot.send_document(chat_id, pdf_file, filename=pdf_file_name)
 
         # Move the compressed file to the server directory
         server_pdf_path = os.path.join(FILES_DIR, os.path.basename(compressed_pdf_path))
@@ -551,9 +554,6 @@ def handle_pdf_generation(data, chat_id):
         creation_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
             log_file.write(f"{os.path.basename(compressed_pdf_path)},{creation_time}\n")
-
-        # Cleanup: Optionally remove the original uncompressed file
-        os.remove(pdf_path)
 
     except Exception as e:
         bot.send_message(chat_id, f"Error: {e}")

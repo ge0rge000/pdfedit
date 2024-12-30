@@ -1,14 +1,13 @@
-2024-12-30 20:38:33,050 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 20:38:33,793 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getMe HTTP/1.1" 200 267
-2024-12-30 20:38:33,795 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 20:38:34,412 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getUpdates?offset=1&timeout=20 HTTP/1.1" 200 427
-2024-12-30 20:38:34,413 - DEBUG - Received message from chat_id 820721407: Mme. BEREssssTE Mamady
+2024-12-30 21:07:09,365 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 21:07:11,557 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getMe HTTP/1.1" 200 267
+2024-12-30 21:07:11,558 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 21:07:14,807 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getUpdates?offset=1&timeout=20 HTTP/1.1" 200 422
+2024-12-30 21:07:14,807 - DEBUG - Received message from chat_id 820721407: Mme. BERETE Mamady
 15/09/2005
 1 05 09 99 336 167 24
 29 RUE MAXIME BACQUET
-7501
-2024-12-30 20:38:34,416 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 20:38:37,152 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendMessage?chat_id=820721407&text=All+details+received+for+Mme.+BEREssssTE+Mamady.+Generating++PDF+NOW... HTTP/1.1" 200 354
-2024-12-30 20:38:37,749 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 20:38:38,595 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendMessage?chat_id=820721407&text=Error%3A+%5BWinError+2%5D+The+system+cannot+find+the+file+specified HTTP/1.1" 200 344
-2024-12-30 20:38:54,594 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getUpdates?offset=560670531&timeout=20 HTTP/1.1" 200 23
+750
+2024-12-30 21:07:14,810 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 21:07:16,895 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendMessage?chat_id=820721407&text=All+details+received+for+Mme.+BERETE+Mamady.+Generating++PDF+NOW... HTTP/1.1" 200 350
+2024-12-30 21:07:17,543 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 21:07:20,024 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendMessage?chat_id=820721407&text=Error%3A+%5BWinError+2%5D+The+system+cannot+find+the+file+specified HTTP/1.1" 200 344
