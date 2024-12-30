@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 import io
 import logging
 from dateutil.relativedelta import relativedelta
+logging.basicConfig(level=logging.DEBUG, filename="bot_debug.log", filemode="w", format="%(asctime)s - %(levelname)s - %(message)s")
 import threading
 from PyPDF2 import PdfWriter
 
@@ -50,7 +51,6 @@ def create_pdf(title, first_name, second_name, address_line, user_input_code, us
         output_pdf_path = f"{first_name} {second_name}.pdf"
         reader = PdfReader(input_pdf_path)
         writer = PdfWriter()
-        writer.compress_content_streams = True  # Compress streams
         current_datetime = datetime.now().strftime("D:%Y%m%d%H%M%S")
         writer.add_metadata({
                     "/Title": "driver_out.pdf",
