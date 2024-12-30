@@ -1,13 +1,13 @@
-2024-12-30 00:40:08,547 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 00:40:09,129 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getMe HTTP/1.1" 200 267
-2024-12-30 00:40:09,131 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 00:40:09,648 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getUpdates?offset=1&timeout=20 HTTP/1.1" 200 422
-2024-12-30 00:40:09,648 - DEBUG - Received message from chat_id 820721407: M. BERETE Mamady
+2024-12-30 19:20:47,149 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 19:20:47,710 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getMe HTTP/1.1" 200 267
+2024-12-30 19:20:47,711 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 19:20:50,742 - DEBUG - https://api.telegram.org:443 "GET /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/getUpdates?offset=1&timeout=20 HTTP/1.1" 200 424
+2024-12-30 19:20:50,743 - DEBUG - Received message from chat_id 820721407: Mme. BERETE Mamady
 15/09/2005
 1 05 09 99 336 167 24
 29 RUE MAXIME BACQUET
 75010
-2024-12-30 00:40:09,652 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 00:40:10,229 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendMessage?chat_id=820721407&text=All+details+received+for+M.+BERETE+Mamady.+Generating+your+PDF... HTTP/1.1" 200 348
-2024-12-30 00:40:10,901 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
-2024-12-30 00:40:15,689 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendDocument?chat_id=820721407 HTTP/1.1" 200 850
+2024-12-30 19:20:50,747 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 19:20:51,291 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendMessage?chat_id=820721407&text=All+details+received+for+Mme.+BERETE+Mamady.+Generating++PDF+NOW... HTTP/1.1" 200 350
+2024-12-30 19:20:51,908 - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2024-12-30 19:20:56,590 - DEBUG - https://api.telegram.org:443 "POST /bot7718033282:AAGFpbL5R70qISG2aWS5FtcMBuHeCGXnhSY/sendDocument?chat_id=820721407 HTTP/1.1" 200 850
