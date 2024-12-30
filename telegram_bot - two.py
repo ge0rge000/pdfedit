@@ -516,7 +516,7 @@ def validate_type_number(message):
         bot.send_message(chat_id, "Enter your Type Number:")
     elif 'Type Number' not in data:
         data['Type Number'] = text
-        bot.send_message(chat_id, "Generating  PDF Now , please wait...")
+        bot.send_message(chat_id, "Generating  PDF Now , please wait.")
         generate_pdf_and_send(chat_id)
 
 
