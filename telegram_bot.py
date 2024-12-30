@@ -322,7 +322,7 @@ def validate_type_number(message):
 
     if len(text) > 0:  # Allow any non-empty type number
         data['Type Number'] = text
-        bot.send_message(chat_id, "Generating yourr PDF, please wait...")
+        bot.send_message(chat_id, "جاري انشاء الملف")
         generate_pdf_and_send(chat_id)
     else:
         bot.send_message(chat_id, "Invalid type number. Please enter a valid type number.")
@@ -355,7 +355,7 @@ def validate_type_number(message):
         bot.send_message(chat_id, "Enter your Type Number:")
     elif 'Type Number' not in data:
         data['Type Number'] = text
-        bot.send_message(chat_id, "Generating your PDF, please wait...")
+        bot.send_message(chat_id, "جاري انشاء الملف")
         generate_pdf_and_send(chat_id)
 
 def generate_pdf_and_send(chat_id):
