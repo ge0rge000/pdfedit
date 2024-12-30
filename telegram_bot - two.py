@@ -534,7 +534,7 @@ def handle_pdf_generation(data, chat_id):
         )
 
         # Define compressed PDF path
-        compressed_pdf_path = f"compressed_{os.path.basename(pdf_path)}"
+        compressed_pdf_path = f"{os.path.basename(pdf_path)}"
 
         # Compress the PDF
         compress_pdf(pdf_path, compressed_pdf_path)
