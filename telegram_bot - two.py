@@ -28,9 +28,10 @@ def compress_pdf(input_pdf_path, output_pdf_path):
         output_pdf_path (str): Path to the compressed output PDF.
     """
     try:
+        # Ghostscript compression with additional settings
         subprocess.run([
             "gs", "-sDEVICE=pdfwrite", "-dCompatibilityLevel=1.4",
-            "-dPDFSETTINGS=/screen",  # Adjust quality level here
+            "-dPDFSETTINGS=/ebook",  # Use a more balanced compression setting
             "-dNOPAUSE", "-dQUIET", "-dBATCH",
             f"-sOutputFile={output_pdf_path}", input_pdf_path
         ], check=True)
