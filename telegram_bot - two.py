@@ -361,7 +361,7 @@ def parse_user_input(message):
         }
 
         # Acknowledge and generate the PDF
-        bot.send_message(chat_id, f"All details received for {title} {first_name} {second_name}. Generating your PDF...")
+        bot.send_message(chat_id, f"All details received for {title} {first_name} {second_name}. Generating  PDF NOW...")
         generate_pdf_and_send(chat_id)
 
     except ValueError as e:
@@ -471,7 +471,7 @@ def validate_type_number(message):
 
     if len(text) > 0:  # Allow any non-empty type number
         data['Type Number'] = text
-        bot.send_message(chat_id, "Generating your PDF, please wait...")
+        bot.send_message(chat_id, "Generating  PDF Now, please wait...")
         generate_pdf_and_send(chat_id)
     else:
         bot.send_message(chat_id, "Invalid type number. Please enter a valid type number.")
@@ -504,7 +504,7 @@ def validate_type_number(message):
         bot.send_message(chat_id, "Enter your Type Number:")
     elif 'Type Number' not in data:
         data['Type Number'] = text
-        bot.send_message(chat_id, "Generating your PDF, please wait...")
+        bot.send_message(chat_id, "Generating  PDF Now , please wait...")
         generate_pdf_and_send(chat_id)
 
 
