@@ -230,7 +230,7 @@ def handle_all_messages(message):
         # Split input into lines
         lines = text.split("\n")
         if len(lines) != 5:
-            raise ValueError("Error: Please provide exactly 5 lines of information. Each line must be as follows:\n\n"
+            raise ValueError("Erroor: Please provide exactly 5 lines of information. Each line must be as follows:\n\n"
                              "1. Title and full name ( 'M. BERETE Mamady' or 'Mme. BERETE Mamady')\n"
                              "2. Birthday in format DD/MM/YYYY (e.g., '15/09/2005')\n"
                              "3. Code with 15 digits separated by spaces (e.g., '1 05 09 99 336 167 24')\n"
