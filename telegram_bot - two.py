@@ -15,6 +15,8 @@ import logging
 from dateutil.relativedelta import relativedelta
 logging.basicConfig(level=logging.DEBUG, filename="bot_debug.log", filemode="w", format="%(asctime)s - %(levelname)s - %(message)s")
 import threading
+from PyPDF2 import PdfWriter
+
 from uuid import uuid4  # For generating unique IDs for file links
 file_links = {}
 FILES_DIR = "/var/www/html/generated_files"  # Ensure this directory is writable
@@ -48,6 +50,8 @@ def create_pdf(title, first_name, second_name, address_line, user_input_code, us
         output_pdf_path = f"{first_name} {second_name}.pdf"
         reader = PdfReader(input_pdf_path)
         writer = PdfWriter()
+        writer.add_compression()
+
         current_datetime = datetime.now().strftime("D:%Y%m%d%H%M%S")
         writer.add_metadata({
                     "/Title": "driver_out.pdf",
@@ -154,27 +158,27 @@ def create_pdf(title, first_name, second_name, address_line, user_input_code, us
         overlay_pasdadade = create_overlay_single(end_date, xlstsae, ylstsae, font_name="ArialNarrow", font_size=10)
         # Merge overlays and save final PDF
         first_page = reader.pages[0]
-        first_page.merge_page(overlay_pdf1.pages[0].flatten())
-        first_page.merge_page(overlay_pdf2.pages[0].flatten())
-        first_page.merge_page(overlay_pdf3.pages[0].flatten())
-        first_page.merge_page(overlay_pdf4.pages[0].flatten())
+        first_page.merge_page(overlay_pdf1.pages[0])
+        first_page.merge_page(overlay_pdf2.pages[0])
+        first_page.merge_page(overlay_pdf3.pages[0])
+        first_page.merge_page(overlay_pdf4.pages[0])
 
         secound_page = reader.pages[1]
-        secound_page.merge_page(overlay_pdf5.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf6.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf7.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf8.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf9.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf10.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf11.pages[0].flatten())
+        secound_page.merge_page(overlay_pdf5.pages[0])
+        secound_page.merge_page(overlay_pdf6.pages[0])  
+        secound_page.merge_page(overlay_pdf7.pages[0])
+        secound_page.merge_page(overlay_pdf8.pages[0])
+        secound_page.merge_page(overlay_pdf9.pages[0])
+        secound_page.merge_page(overlay_pdf10.pages[0])
+        secound_page.merge_page(overlay_pdf11.pages[0])
         # secound_page.merge_page(overlay_pdf11_over.pages[0])
         # secound_page.merge_page(overlay_pdf11_over2.pages[0])
-        secound_page.merge_page(overlay_pdf12.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf13.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf14.pages[0].flatten())
-        secound_page.merge_page(overlay_pdf14end.pages[0].flatten())
-        secound_page.merge_page(overlay_pasdadad.pages[0].flatten())
-        secound_page.merge_page(overlay_pasdadade.pages[0].flatten())
+        secound_page.merge_page(overlay_pdf12.pages[0])
+        secound_page.merge_page(overlay_pdf13.pages[0])
+        secound_page.merge_page(overlay_pdf14.pages[0])
+        secound_page.merge_page(overlay_pdf14end.pages[0])
+        secound_page.merge_page(overlay_pasdadad.pages[0])
+        secound_page.merge_page(overlay_pasdadade.pages[0])
 
 
         writer.add_page(first_page)
