@@ -16,8 +16,26 @@ from dateutil.relativedelta import relativedelta
 logging.basicConfig(level=logging.DEBUG, filename="bot_debug.log", filemode="w", format="%(asctime)s - %(levelname)s - %(message)s")
 import threading
 from PyPDF2 import PdfWriter
+import subprocess
 
 from uuid import uuid4  # For generating unique IDs for file links
+def compress_pdf(input_pdf_path, output_pdf_path):
+    """
+    Compresses a PDF using Ghostscript.
+    
+    Args:
+        input_pdf_path (str): Path to the input PDF.
+        output_pdf_path (str): Path to the compressed output PDF.
+    """
+    try:
+        subprocess.run([
+            "gs", "-sDEVICE=pdfwrite", "-dCompatibilityLevel=1.4",
+            "-dPDFSETTINGS=/screen",  # Adjust quality level here
+            "-dNOPAUSE", "-dQUIET", "-dBATCH",
+            f"-sOutputFile={output_pdf_path}", input_pdf_path
+        ], check=True)
+    except subprocess.CalledProcessError as e:
+        raise Exception(f"Ghostscript compression failed: {e}")
 file_links = {}
 FILES_DIR = "/var/www/html/generated_files"  # Ensure this directory is writable
 os.makedirs(FILES_DIR, exist_ok=True)
@@ -230,7 +248,7 @@ def handle_all_messages(message):
         # Split input into lines
         lines = text.split("\n")
         if len(lines) != 5:
-            raise ValueError("Erroor: Please provide exactly 5 lines of information. Each line must be as follows:\n\n"
+            raise ValueError("Error: Please provide exactly 5 lines of information. Each line must be as follows:\n\n"
                              "1. Title and full name ( 'M. BERETE Mamady' or 'Mme. BERETE Mamady')\n"
                              "2. Birthday in format DD/MM/YYYY (e.g., '15/09/2005')\n"
                              "3. Code with 15 digits separated by spaces (e.g., '1 05 09 99 336 167 24')\n"
@@ -504,6 +522,7 @@ def validate_type_number(message):
 
 def handle_pdf_generation(data, chat_id):
     try:
+        # Generate the initial PDF
         pdf_path = create_pdf(
             title=data["Title"],
             first_name=data["First Name"],
@@ -513,19 +532,28 @@ def handle_pdf_generation(data, chat_id):
             user_birthday=data["Birthday"],
             user_input_value=data["Type Number"]
         )
-        if chat_id not in generated_files:
-            generated_files[chat_id] = []
-        generated_files[chat_id].append(pdf_path)
 
-        with open(pdf_path, "rb") as pdf_file:
+        # Define compressed PDF path
+        compressed_pdf_path = f"compressed_{os.path.basename(pdf_path)}"
+
+        # Compress the PDF
+        compress_pdf(pdf_path, compressed_pdf_path)
+
+        # Send the compressed PDF via Telegram
+        with open(compressed_pdf_path, "rb") as pdf_file:
             bot.send_document(chat_id, pdf_file)
-        # Move file to server directory
-        server_pdf_path = os.path.join(FILES_DIR, os.path.basename(pdf_path))
-        os.rename(pdf_path, server_pdf_path)
+
+        # Move the compressed file to the server directory
+        server_pdf_path = os.path.join(FILES_DIR, os.path.basename(compressed_pdf_path))
+        os.rename(compressed_pdf_path, server_pdf_path)
+
+        # Log the file creation
         creation_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
-            log_file.write(f"{os.path.basename(pdf_path)},{creation_time}\n")
-         
+            log_file.write(f"{os.path.basename(compressed_pdf_path)},{creation_time}\n")
+
+        # Cleanup: Optionally remove the original uncompressed file
+        os.remove(pdf_path)
 
     except Exception as e:
         bot.send_message(chat_id, f"Error: {e}")
