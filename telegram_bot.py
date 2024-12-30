@@ -322,7 +322,7 @@ def validate_type_number(message):
 
     if len(text) > 0:  # Allow any non-empty type number
         data['Type Number'] = text
-        bot.send_message(chat_id, "Generating your PDF, please wait...")
+        bot.send_message(chat_id, "Generating yourr PDF, please wait...")
         generate_pdf_and_send(chat_id)
     else:
         bot.send_message(chat_id, "Invalid type number. Please enter a valid type number.")
