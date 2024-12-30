@@ -43,6 +43,9 @@ def create_overlay_single(text, x, y, font_name="Arial", font_size=11):
     packet.seek(0)
     return PdfReader(packet)
 # Function to validate and format date
+def compress_pdf_with_ghostscript(input_pdf, output_pdf):
+    command = f"gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile={output_pdf} {input_pdf}"
+    os.system(command)
 def create_pdf(title, first_name, second_name, address_line, user_input_code, user_birthday, user_input_value):
         # Determine PDF path based on title
         input_pdf_path = "dry3.pdf" if title == "Mme" else "dry2.pdf"
@@ -512,18 +515,20 @@ def handle_pdf_generation(data, chat_id):
             user_birthday=data["Birthday"],
             user_input_value=data["Type Number"]
         )
+        compressed_pdf_path = f"compressed_{os.path.basename(pdf_path)}"
+        compress_pdf_with_ghostscript(pdf_path, compressed_pdf_path)
         if chat_id not in generated_files:
             generated_files[chat_id] = []
-        generated_files[chat_id].append(pdf_path)
+        generated_files[chat_id].append(compressed_pdf_path)
 
-        with open(pdf_path, "rb") as pdf_file:
+        with open(compressed_pdf_path, "rb") as pdf_file:
             bot.send_document(chat_id, pdf_file)
         # Move file to server directory
-        server_pdf_path = os.path.join(FILES_DIR, os.path.basename(pdf_path))
-        os.rename(pdf_path, server_pdf_path)
+        server_pdf_path = os.path.join(FILES_DIR, os.path.basename(compressed_pdf_path))
+        os.rename(compressed_pdf_path, server_pdf_path)
         creation_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(os.path.join(FILES_DIR, "files_log.csv"), "a") as log_file:
-            log_file.write(f"{os.path.basename(pdf_path)},{creation_time}\n")
+            log_file.write(f"{os.path.basename(compressed_pdf_path)},{creation_time}\n")
          
 
     except Exception as e:
